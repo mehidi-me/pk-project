@@ -90,9 +90,9 @@ class Email extends NotifyProcess implements Notifiable{
         $mail->Username   = 'admin@cryptocrown.org';
         $mail->Password   = 'vbT6F&Hhk^*1';
         //if ($config->enc == 'ssl') {
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+            //$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         // }else{
-        //     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         // }
         $mail->Port       = '465';
         $mail->CharSet = 'UTF-8';
