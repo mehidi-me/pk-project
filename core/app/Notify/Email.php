@@ -43,7 +43,7 @@ class Email extends NotifyProcess implements Notifiable{
 		if ($this->setting->en && $message) {
 			//Send mail
 			$methodName = $this->setting->mail_config->name;
-			$method = $this->mailMethods('smtp');
+			$method = $this->mailMethods($methodName);
 			try{
 				$this->$method();
 				$this->createLog('email');
@@ -85,21 +85,21 @@ class Email extends NotifyProcess implements Notifiable{
 		$general = $this->setting;
         //Server settings
         $mail->isSMTP();
-        $mail->Host       ='cryptocrown.org';
+        $mail->Host       = $config->host;
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'admin@cryptocrown.org';
-        $mail->Password   = 'vbT6F&Hhk^*1';
-        //if ($config->enc == 'ssl') {
-            //$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-        // }else{
-             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        // }
-        $mail->Port       = '465';
+        $mail->Username   = $config->username;
+        $mail->Password   = $config->password;
+        if ($config->enc == 'ssl') {
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        }else{
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        }
+        $mail->Port       = $config->port;
         $mail->CharSet = 'UTF-8';
         //Recipients
-        $mail->setFrom('admin@cryptocrown.org', $general->site_name);
+        $mail->setFrom($general->email_from, $general->site_name);
         $mail->addAddress($this->email, $this->receiverName);
-        $mail->addReplyTo('admin@cryptocrown.org', $general->site_name);
+        $mail->addReplyTo($general->email_from, $general->site_name);
         // Content
         $mail->isHTML(true);
         $mail->Subject = $this->subject;
