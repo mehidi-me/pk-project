@@ -8,7 +8,7 @@
         style="background-image: url({{ asset($activeTemplateTrue . 'images/shapes/footer-05.png') }});">
         <div class="footer-area__bg">
         </div>
-        <div class="footer-shape">
+        <div class="footer-shape" style="display: :none">
             <img src="{{ getImage('assets/images/frontend/footer/' . $footer->data_values->image, '240x580') }}"
                 alt="">
         </div>
